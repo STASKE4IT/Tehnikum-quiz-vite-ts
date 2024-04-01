@@ -1,8 +1,27 @@
+import { useEffect, useState } from "react";
 import { Heading } from "../components/Typography/Heading";
 import { AppButton } from "../components/UI/AppButton";
 import { AppInput } from "../components/UI/AppInput";
+import { useNavigate } from "react-router-dom";
 
 const StepOne = () => {
+  const [answerValue, setAnswerValue] = useState("");
+  const [answerError, setAnswerError] = useState(false);
+
+  useEffect(() => {
+    if (!answerValue) {
+      setAnswerError(true);
+    } else {
+      setAnswerError(false);
+    }
+  }, [answerValue, answerError]);
+
+  const navigate = useNavigate();
+
+  const submitHandler = () => {
+    navigate("/step-two");
+  };
+
   return (
     <div className="container">
       <div className="wrapper">
@@ -26,15 +45,19 @@ const StepOne = () => {
               headingText={"1. Где вы узнали про нашу школу?"}
               headingType={"h1"}
             />
-            <AppInput
-              inputLabel={""}
-              id={"answer"}
-              inputType={"text"}
-              inputPlaceholder={"Ваш ответ"}
-              errorMessage={"Введите ваш отве"} onChange={function (e: any): void {
-                throw new Error("Function not implemented.");
-              } } hasError={false}/>
-            <AppButton isDisabled={false} ButtonText="Далее" />
+            <form onSubmit={submitHandler}>
+              <AppInput
+                inputLabel={""}
+                id={"answer"}
+                inputType={"text"}
+                inputPlaceholder={"Ваш ответ"}
+                errorMessage={"Введите ваш отве"}
+                onChange={(e) => setAnswerValue(e.target.value)}
+                hasError={false}
+              >
+              </AppInput>
+              <AppButton isDisabled={false} ButtonText="Далее" />
+            </form>
           </div>
         </div>
       </div>

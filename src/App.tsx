@@ -10,7 +10,7 @@ import Thanks from "./pages/Thanks";
 
 const router = createBrowserRouter ([
   {
-  path: "/welcome",
+  path: "/",
   element: <Welcome/>
   },
   {

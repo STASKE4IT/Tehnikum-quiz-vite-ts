@@ -29,6 +29,8 @@ const Welcome = () => {
 
   const submitHandler = () => {
     navigate("/step-one")
+    localStorage.setItem("username", nameData)
+    localStorage.setItem("userphone", phoneData)
   };
 
   return (
