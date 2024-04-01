@@ -31,9 +31,10 @@ const StepOne = () => {
               id={"answer"}
               inputType={"text"}
               inputPlaceholder={"Ваш ответ"}
-              errorMessage={"Введите ваш отве"}
-            />
-            <AppButton buttonText="Далее" />
+              errorMessage={"Введите ваш отве"} onChange={function (e: any): void {
+                throw new Error("Function not implemented.");
+              } } hasError={false}/>
+            <AppButton isDisabled={false} ButtonText="Далее" />
           </div>
         </div>
       </div>

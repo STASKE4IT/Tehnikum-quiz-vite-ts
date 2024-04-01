@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import { Heading } from "../components/Typography/Heading";
 import { AppButton } from "../components/UI/AppButton";
 import { AppInput } from "../components/UI/AppInput";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const Welcome = () => { 
-  const [nameData, setNameData] = useState("")
-  const [phoneData, setPhoneData] = useState("")
+const Welcome = () => {
+  const [nameData, setNameData] = useState("");
+  const [phoneData, setPhoneData] = useState("");
 
-  const [nameError, setNameError] = useState(false)
-  const [phoneError, setPhoneError] = useState(false)
+  const [nameError, setNameError] = useState(false);
+  const [phoneError, setPhoneError] = useState(false);
 
   useEffect(() => {
     if (!nameData) {
@@ -17,20 +17,29 @@ const Welcome = () => {
     } else {
       setNameError(false);
     }
-  
+
     if (!phoneData) {
       setPhoneError(true);
     } else {
       setPhoneError(false);
     }
   }, [nameData, phoneData]);
-  
+
+  const navigate = useNavigate();
+
+  const submitHandler = () => {
+    navigate("/step-one")
+  };
+
   return (
     <div className="container">
       <div className="wrapper">
         <div className="welcome">
-          <Heading headingType="h1" headingText="Добро пожаловать в квиз от лучшего учебного центра" />
-          <form className="welcome__form">
+          <Heading
+            headingType="h1"
+            headingText="Добро пожаловать в квиз от лучшего учебного центра"
+          />
+          <form className="welcome__form" onSubmit={submitHandler}>
             <AppInput
               inputLabel="Ваше имя"
               id="username"
@@ -38,7 +47,7 @@ const Welcome = () => {
               inputPlaceholder="Ваш ответ"
               errorMessage="Введите имя"
               hasError={nameError}
-              onChange={(e) => (setNameData(e. target.value))}
+              onChange={(e) => setNameData(e.target.value)}
             />
             <AppInput
               inputLabel="Ваш номер"
@@ -47,11 +56,12 @@ const Welcome = () => {
               inputPlaceholder="+998 9- --- -- -- "
               errorMessage="Введите номер в правильном формате"
               hasError={phoneError}
-              onChange={(e) => (setPhoneData(e.target.value))}
+              onChange={(e) => setPhoneData(e.target.value)}
             />
-            <Link to="/step-one">
-            <AppButton isDisabled={false} ButtonText="Далее"/>
-            </Link>
+              <AppButton
+                isDisabled={false}
+                ButtonText="Далее"
+              />
           </form>
         </div>
       </div>
